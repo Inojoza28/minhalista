@@ -1,0 +1,440 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8faff;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Header no topo */
+header {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    background: linear-gradient(to right, #3f51b5, #5a55e5);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para o conteúdo do header */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* Estilo para a logo */
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover; /* Garante que a logo mantenha suas proporções */
+    border-radius: 50%; /* Adiciona bordas arredondadas à logo, opcional */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Layout principal */
+main {
+    width: 100%;
+    max-width: 700px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+/* Sessão de entrada */
+.input-section {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+#item-input {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#item-input:focus {
+    border-color: #5a55e5;
+    box-shadow: 0 0 8px rgba(90, 85, 229, 0.3);
+}
+
+button {
+    padding: 12px 18px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Botões de ação */
+.action-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre ícone e texto */
+    background: #f4f4f4;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-buttons button:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.action-buttons button i {
+    font-size: 1rem; /* Tamanho do ícone */
+}
+
+
+/* Botões de excluir */
+.delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #e53935; /* Cor inicial */
+    font-size: 1.2rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-button:hover {
+    color: #c62828; /* Cor ao passar o mouse */
+    transform: scale(1.1); /* Leve efeito de ampliação */
+}
+
+.delete-button i {
+    pointer-events: none; /* Garante que apenas o botão seja clicável */
+}
+
+#remove-all-button {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#remove-all-button:hover {
+    background-color: #c62828;
+    transform: translateY(-2px);
+}
+
+
+#add-button {
+    background-color: #5a55e5;
+    color: white;
+    font-weight: 600;
+}
+
+#add-button:hover {
+    background-color: #4d47c3;
+    transform: translateY(-2px);
+}
+
+#microphone-button {
+    background: none;
+    border: 1px solid #ddd;
+    color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#microphone-button:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.1);
+}
+
+#microphone-button img {
+    width: 22px;
+    height: 22px;
+}
+
+#microphone-button.listening {
+    background-color: #948bfc; /* Roxo claro */
+    border-color: #948bfc; /* Borda roxa intermediária */
+    color: white;
+    box-shadow: 0 0 10px rgba(142, 130, 250, 0.8);
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+#microphone-button.listening:hover {
+    background-color: #948bfc; /* Roxo levemente mais escuro */
+    box-shadow: 0 0 15px rgba(142, 130, 250, 0.8);
+}
+
+/* Lista de compras */
+.list-section {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Animação para adicionar itens */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animação para remover itens */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+#shopping-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#shopping-list li {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.3s ease; /* Animação ao adicionar */
+}
+
+#shopping-list li.removing {
+    animation: fadeOut 0.3s ease; /* Animação ao excluir */
+    pointer-events: none; /* Evita interações durante a animação */
+}
+
+#shopping-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+#shopping-list li span {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Botões de ação */
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.action-buttons button {
+    background: #f4f4f4;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-buttons button:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    main {
+        padding: 15px;
+    }
+
+    #item-input {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+
+    header {
+        font-size: 1.6rem;
+    }
+}
+
+/* Responsividade para tablets */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    header {
+        font-size: 1.4rem;
+        padding: 15px 0;
+    }
+
+    .logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    #item-input {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+
+    #remove-all-button {
+        font-size: 0.8rem; /* Texto menor */
+        padding: 8px 12px; /* Menor espaçamento */
+    }
+
+    #remove-all-button i {
+        font-size: 0.9rem; /* Ícone menor */
+    }
+
+    #microphone-button {
+        width: 40px;
+        height: 40px;
+    }
+
+    #microphone-button img {
+        width: 20px;
+        height: 20px;
+    }
+
+    #shopping-list li {
+        padding: 10px 12px;
+    }
+
+    #shopping-list li span {
+        font-size: 0.9rem;
+    }
+
+    .action-buttons button {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+}
+
+/* Responsividade para celulares (telas pequenas) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    header {
+        font-size: 0.9rem;
+        padding: 12px 0;
+    }
+
+    .logo {
+        width: 35px;
+        height: 35px;
+    }
+
+    main {
+        padding: 12px;
+    }
+
+    #item-input {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+
+    button {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+
+    #remove-all-button {
+        font-size: 0.7rem; /* Texto ainda menor */
+        padding: 6px 10px; /* Mais compacto */
+        gap: 5px; /* Reduz espaço entre ícone e texto */
+    }
+
+    #remove-all-button i {
+        font-size: 0.8rem; /* Ícone mais compacto */
+    }
+
+    #microphone-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    #microphone-button img {
+        width: 18px;
+        height: 18px;
+    }
+
+    #shopping-list li {
+        padding: 8px 10px;
+        margin: 8px 0;
+    }
+
+    #shopping-list li span {
+        font-size: 0.8rem;
+    }
+
+    .action-buttons button {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+    }
+}
