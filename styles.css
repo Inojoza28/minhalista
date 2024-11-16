@@ -284,6 +284,13 @@ button {
 #shopping-list li span {
     font-size: 1rem;
     color: #555;
+    word-wrap: break-word; /* Permite a quebra de palavras muito longas */
+    word-break: break-word; /* Garante a quebra de palavras */
+    white-space: normal; /* Permite que o texto quebre em múltiplas linhas */
+    display: block; /* Garante que o span ocupe o espaço necessário */
+    line-height: 1.4; /* Ajusta o espaçamento entre as linhas */
+    overflow-wrap: break-word; /* Suporte para navegadores modernos */
+
 }
 
 /* Botões de ação */
