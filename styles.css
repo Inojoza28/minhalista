@@ -209,6 +209,24 @@ button {
     margin-bottom: 20px;
 }
 
+/* Estilo para itens concluídos */
+.list-item.completed span {
+    text-decoration: line-through;
+    color: #888; /* Cor mais clara para indicar conclusão */
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.complete-checkbox {
+    margin-right: 10px;
+    cursor: pointer;
+    transform: scale(1.2); /* Torna o checkbox mais visível */
+}
+
+.complete-checkbox:checked {
+    accent-color: #5a55e5; /* Cor do checkbox ao ser marcado */
+}
+
+
 /* Animação para adicionar itens */
 @keyframes fadeIn {
     from {

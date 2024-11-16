@@ -17,12 +17,15 @@ recognition.interimResults = false;
 recognition.continuous = false;
 
 // Função para adicionar item
-function addItem(text) {
+function addItem(text, completed = false) {
   if (!text.trim()) return alert('Por favor, insira um item.');
 
   const listItem = document.createElement('li');
   listItem.classList.add('list-item'); // Classe para animação
+  if (completed) listItem.classList.add('completed'); // Marca como concluído se necessário
+
   listItem.innerHTML = `
+    <input type="checkbox" class="complete-checkbox" ${completed ? 'checked' : ''}>
     <span>${text}</span>
     <button class="delete-button">
       <i class="fas fa-trash"></i>
@@ -35,9 +38,22 @@ function addItem(text) {
   // Adiciona evento ao botão de excluir
   listItem.querySelector('.delete-button').addEventListener('click', () => removeItem(listItem));
 
+  // Adiciona evento ao checkbox de concluir
+  listItem.querySelector('.complete-checkbox').addEventListener('change', (event) => toggleComplete(event, listItem));
+
   updateEmptyMessage();
   updateRemoveAllButton(); // Atualiza o botão de "Remover Todos"
   saveToLocalStorage();
+}
+
+// Função para alternar o estado de concluído
+function toggleComplete(event, listItem) {
+  if (event.target.checked) {
+    listItem.classList.add('completed'); // Marca como concluído
+  } else {
+    listItem.classList.remove('completed'); // Remove a marcação
+  }
+  saveToLocalStorage(); // Atualiza o localStorage
 }
 
 // Função para remover item
@@ -64,49 +80,52 @@ function removeAllItems() {
 
 // Função para salvar lista no localStorage
 function saveToLocalStorage() {
-  const items = Array.from(list.children).map(item => item.querySelector('span').textContent);
+  const items = Array.from(list.children).map(item => ({
+    text: item.querySelector('span').textContent,
+    completed: item.querySelector('.complete-checkbox').checked
+  }));
   localStorage.setItem('shoppingList', JSON.stringify(items));
 }
 
 // Função para carregar lista do localStorage
 function loadFromLocalStorage() {
   const items = JSON.parse(localStorage.getItem('shoppingList')) || [];
-  items.forEach(addItem);
+  items.forEach(item => addItem(item.text, item.completed));
 }
 
 // Função para baixar lista aprimorada
 function downloadList() {
-    const items = Array.from(list.children).map((item, index) => {
-      const text = item.querySelector('span').textContent;
-      return `${index + 1}. ${text}`; // Adiciona numeração aos itens
-    });
-  
-    if (items.length === 0) {
-      alert('A lista está vazia! Adicione itens antes de baixar.');
-      return;
-    }
-  
-    const date = new Date();
-    const formattedDate = date.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  
-    const header = `Lista de Compras\nCriada em: ${formattedDate}\nTotal de Itens: ${items.length}\n\nItens:\n`;
-    const content = header + items.join('\n');
-  
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'lista_de_compras.txt';
-    a.click();
-    URL.revokeObjectURL(url);
+  const items = Array.from(list.children).map((item, index) => {
+    const text = item.querySelector('span').textContent;
+    const completed = item.querySelector('.complete-checkbox').checked ? ' (Concluído)' : '';
+    return `${index + 1}. ${text}${completed}`;
+  });
+
+  if (items.length === 0) {
+    alert('A lista está vazia! Adicione itens antes de baixar.');
+    return;
   }
-  
+
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  const header = `Lista de Compras\nCriada em: ${formattedDate}\nTotal de Itens: ${items.length}\n\nItens:\n`;
+  const content = header + items.join('\n');
+
+  const blob = new Blob([content], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'lista_de_compras.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 // Função para imprimir lista
 function printList() {
