@@ -15,7 +15,7 @@ body.dark-mode {
     position: absolute;
     top: 50px;
     right: 45px;
-    background: linear-gradient(to right, #677eff, #5a55e5);
+    background: linear-gradient(to right, #5a55e5, #677eff);
     border: none;
     border-radius: 50%;
     width: 45px;
