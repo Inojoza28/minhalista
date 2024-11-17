@@ -205,6 +205,8 @@ body.dark-mode .modal-content ul{
 
     #dark-mode-toggle:hover{
       transition: none;
+      transform: none;
+      box-shadow: none;
     }
 
     body.dark-mode #shopping-list li {
