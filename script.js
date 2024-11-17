@@ -1,4 +1,4 @@
-// Seleção de elementos
+// Seleção de elementos principais
 const itemInput = document.getElementById('item-input');
 const addButton = document.getElementById('add-button');
 const list = document.getElementById('shopping-list');
@@ -6,25 +6,30 @@ const downloadButton = document.getElementById('download-button');
 const printButton = document.getElementById('print-button');
 const microphoneButton = document.getElementById('microphone-button');
 const emptyMessage = document.getElementById('empty-message');
-const removeAllButton = document.getElementById('remove-all-button'); // Botão para remover todos
-const totalItemsContainer = document.getElementById('total-items'); // Contêiner do total de itens
-const totalItems = document.getElementById('item-count'); // Total de itens
+const removeAllButton = document.getElementById('remove-all-button');
+const totalItemsContainer = document.getElementById('total-items');
+const totalItems = document.getElementById('item-count');
+const helpButton = document.getElementById('help-button');
+const helpModal = document.getElementById('help-modal');
+const closeButton = helpModal.querySelector('.close-button');
 
 // Configuração do reconhecimento de voz
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
-
-recognition.lang = 'pt-BR'; // Configurar idioma
+recognition.lang = 'pt-BR';
 recognition.interimResults = false;
 recognition.continuous = false;
 
-// Função para adicionar item
+// Adicionar item à lista
 function addItem(text, completed = false) {
-  if (!text.trim()) return alert('Por favor, insira um item.');
+  if (!text.trim()) {
+    alert('Por favor, insira um item.');
+    return;
+  }
 
   const listItem = document.createElement('li');
-  listItem.classList.add('list-item'); // Classe para animação
-  if (completed) listItem.classList.add('completed'); // Marca como concluído se necessário
+  listItem.classList.add('list-item');
+  if (completed) listItem.classList.add('completed');
 
   listItem.innerHTML = `
     <input type="checkbox" class="complete-checkbox" ${completed ? 'checked' : ''}>
@@ -34,82 +39,79 @@ function addItem(text, completed = false) {
     </button>
   `;
 
-  // Adiciona animação e item à lista
   list.appendChild(listItem);
 
-  // Adiciona evento ao botão de excluir
   listItem.querySelector('.delete-button').addEventListener('click', () => removeItem(listItem));
-
-  // Adiciona evento ao checkbox de concluir
   listItem.querySelector('.complete-checkbox').addEventListener('change', (event) => toggleComplete(event, listItem));
 
   updateEmptyMessage();
-  updateItemCount(); // Atualiza o total de itens
-  updateRemoveAllButton(); // Atualiza o botão de "Remover Todos"
+  updateItemCount();
+  updateRemoveAllButton();
   saveToLocalStorage();
 }
 
-// Função para alternar o estado de concluído
+// Alternar estado de conclusão
 function toggleComplete(event, listItem) {
-  if (event.target.checked) {
-    listItem.classList.add('completed'); // Marca como concluído
-  } else {
-    listItem.classList.remove('completed'); // Remove a marcação
-  }
-  saveToLocalStorage(); // Atualiza o localStorage
+  listItem.classList.toggle('completed', event.target.checked);
+  saveToLocalStorage();
 }
 
-// Função para remover item
+// Remover item da lista
 function removeItem(listItem) {
-  listItem.classList.add('removing'); // Adiciona classe de animação para remoção
+  listItem.classList.add('removing');
   setTimeout(() => {
     listItem.remove();
     updateEmptyMessage();
-    updateItemCount(); // Atualiza o total de itens
-    updateRemoveAllButton(); // Atualiza o botão de "Remover Todos"
+    updateItemCount();
+    updateRemoveAllButton();
     saveToLocalStorage();
-  }, 300); // Tempo igual ao da animação CSS
+  }, 300);
 }
 
-// Função para remover todos os itens
+// Remover todos os itens da lista
 function removeAllItems() {
-  const confirmRemoval = confirm('Tem certeza de que deseja remover todos os itens da lista?');
-  if (confirmRemoval) {
-    list.innerHTML = ''; // Remove todos os itens da lista
+  if (confirm('Tem certeza de que deseja remover todos os itens da lista?')) {
+    list.innerHTML = '';
     updateEmptyMessage();
-    updateItemCount(); // Atualiza o total de itens
-    updateRemoveAllButton(); // Atualiza o botão de "Remover Todos"
+    updateItemCount();
+    updateRemoveAllButton();
     saveToLocalStorage();
   }
 }
 
-// Função para salvar lista no localStorage
+// Atualizar mensagem de lista vazia
+function updateEmptyMessage() {
+  emptyMessage.style.display = list.children.length === 0 ? 'block' : 'none';
+}
+
+// Atualizar contador de itens
+function updateItemCount() {
+  const count = list.children.length;
+  totalItems.textContent = count;
+  totalItemsContainer.style.display = count > 0 ? 'block' : 'none';
+}
+
+// Atualizar exibição do botão "Remover Todos"
+function updateRemoveAllButton() {
+  removeAllButton.style.display = list.children.length >= 3 ? 'inline-block' : 'none';
+}
+
+// Salvar lista no localStorage
 function saveToLocalStorage() {
   const items = Array.from(list.children).map(item => ({
     text: item.querySelector('span').textContent,
-    completed: item.querySelector('.complete-checkbox').checked
+    completed: item.querySelector('.complete-checkbox').checked,
   }));
   localStorage.setItem('shoppingList', JSON.stringify(items));
 }
 
-// Função para carregar lista do localStorage
+// Carregar lista do localStorage
 function loadFromLocalStorage() {
   const items = JSON.parse(localStorage.getItem('shoppingList')) || [];
   items.forEach(item => addItem(item.text, item.completed));
 }
 
-// Função para atualizar o total de itens
-function updateItemCount() {
-  const count = list.children.length;
-
-  // Atualiza o valor do contador
-  totalItems.textContent = count;
-
-  // Exibe ou oculta o contador com base no número de itens
-  totalItemsContainer.style.display = count > 0 ? 'block' : 'none';
-}
-
-// Função para baixar lista aprimorada
+// Baixar lista como arquivo
 function downloadList() {
   const items = Array.from(list.children).map((item, index) => {
     const text = item.querySelector('span').textContent;
@@ -123,14 +125,7 @@ function downloadList() {
   }
 
   const date = new Date();
-  const formattedDate = date.toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-
+  const formattedDate = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
   const header = `Lista de Compras\nCriada em: ${formattedDate}\nTotal de Itens: ${items.length}\n\nItens:\n`;
   const content = header + items.join('\n');
 
@@ -143,26 +138,33 @@ function downloadList() {
   URL.revokeObjectURL(url);
 }
 
-// Função para imprimir lista
+// Função de impressão
 function printList() {
   window.print();
 }
 
-// Função para atualizar mensagem de lista vazia
-function updateEmptyMessage() {
-  emptyMessage.style.display = list.children.length === 0 ? 'block' : 'none';
-}
+// Ocultar botão de ajuda durante impressão
+window.addEventListener('beforeprint', () => {
+  helpButton.style.display = 'none';
+});
 
-// Função para exibir ou ocultar o botão "Remover Todos"
-function updateRemoveAllButton() {
-  removeAllButton.style.display = list.children.length >= 3 ? 'inline-block' : 'none';
-}
+window.addEventListener('afterprint', () => {
+  helpButton.style.display = 'block';
+});
 
-// Eventos
+// Eventos de interação
 addButton.addEventListener('click', () => {
   addItem(itemInput.value);
   itemInput.value = '';
-  itemInput.focus(); // Mantém o foco no campo de entrada
+  itemInput.focus();
+});
+
+itemInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    addItem(itemInput.value);
+    itemInput.value = '';
+    itemInput.focus();
+  }
 });
 
 list.addEventListener('click', (event) => {
@@ -172,17 +174,7 @@ list.addEventListener('click', (event) => {
   }
 });
 
-// Permitir adicionar item ao pressionar "Enter"
-itemInput.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') { // Verifica se a tecla pressionada foi "Enter"
-    addItem(itemInput.value); // Adiciona o item
-    itemInput.value = ''; // Limpa o campo de entrada
-    itemInput.focus(); // Mantém o foco no campo de entrada
-  }
-});
-
-removeAllButton.addEventListener('click', removeAllItems); // Evento para remover todos os itens
-
+removeAllButton.addEventListener('click', removeAllItems);
 downloadButton.addEventListener('click', downloadList);
 printButton.addEventListener('click', printList);
 
@@ -206,30 +198,23 @@ recognition.addEventListener('end', () => {
   microphoneButton.classList.remove('listening');
 });
 
-// Inicialização
-loadFromLocalStorage();
-updateEmptyMessage();
-updateItemCount(); // Atualiza o total de itens ao carregar a página
-updateRemoveAllButton(); // Atualiza o botão "Remover Todos" ao carregar a página
-
-// Seleção de elementos
-const helpButton = document.getElementById('help-button');
-const helpModal = document.getElementById('help-modal');
-const closeButton = helpModal.querySelector('.close-button');
-
-// Evento para abrir o modal
+// Controle do modal de ajuda
 helpButton.addEventListener('click', () => {
   helpModal.style.display = 'flex';
 });
 
-// Evento para fechar o modal
 closeButton.addEventListener('click', () => {
   helpModal.style.display = 'none';
 });
 
-// Fechar modal ao clicar fora do conteúdo
 window.addEventListener('click', (event) => {
   if (event.target === helpModal) {
     helpModal.style.display = 'none';
   }
 });
+
+// Inicialização
+loadFromLocalStorage();
+updateEmptyMessage();
+updateItemCount();
+updateRemoveAllButton();

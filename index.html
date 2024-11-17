@@ -6,15 +6,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <title>Minha Lista</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dark-mode/dark-mode.css">
   <link rel="icon" href="assets/Logo.png">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-          <img src="assets/Logo.png" alt="Logo Minha Lista" class="logo">
-          <h1>Minha Lista</h1>
-        </div>
-      </header>      
+  <header>
+    <div class="header-content">
+      <img src="assets/Logo.png" alt="Logo Minha Lista" class="logo">
+      <h1>Minha Lista</h1>
+      <button id="dark-mode-toggle" title="Alternar Modo Escuro">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </header>     
   <main>
     <section class="input-section">
       <input type="text" id="item-input" placeholder="Adicione um novo item" />
@@ -23,7 +27,7 @@
         <img src="assets/microfone.png" alt="Microfone">
       </button>
     </section>
-    <p id="total-items" style="font-size: 1rem; color: #555; text-align: left; margin-top: 5px; display: none;">
+    <p id="total-items" style="display: none;">
       Total de itens: <span id="item-count">0</span>
     </p>    
     <section class="list-section">
@@ -38,7 +42,7 @@
           <i class="fas fa-print"></i> Imprimir Lista
         </button>
         <button id="remove-all-button" style="display: none;">
-          <i class="fas fa-trash-alt"></i> Remover Todos
+          <!-- <i class="fas fa-trash-alt"></i>--> Remover Todos
         </button>
       </section>       
 
@@ -71,5 +75,6 @@
 </div>
   </main>
   <script src="script.js"></script>
+  <script src="dark-mode/dark-mode.js"></script>
 </body>
 </html>

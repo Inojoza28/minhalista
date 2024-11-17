@@ -1,0 +1,198 @@
+/* Modo Dark */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  /* Elementos do header no modo escuro */
+  body.dark-mode header {
+    background: linear-gradient(to right, #1f1f1f, rgba(142, 130, 250, 0.5));
+    color: #ffffff;
+  }
+  
+/* Botão de alternância do modo escuro */
+#dark-mode-toggle {
+    position: absolute;
+    top: 50px;
+    right: 45px;
+    background: linear-gradient(to right, #677eff, #5a55e5);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  
+  #dark-mode-toggle i {
+    font-size: 1.2rem;
+    color: #ffffff;
+    transition: color 0.3s ease;
+  }
+  
+  #dark-mode-toggle:hover {
+    background: linear-gradient(to right, #677eff, #5a55e5);
+    transform: scale(1.1);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+/* Modo escuro para o botão */
+body.dark-mode #dark-mode-toggle {
+    background: rgb(117 102 255 / 35%);
+  }
+  
+  body.dark-mode #dark-mode-toggle i {
+    color: #f4f4f4;
+  }
+  
+  /* Estilizações gerais no modo escuro */
+  body.dark-mode main {
+    background: #1e1e1e;
+    color: #e0e0e0;
+  }
+  
+  body.dark-mode .list-item {
+    background: #292929;
+    border: 1px solid #444;
+  }
+  
+  body.dark-mode .list-item:hover {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
+  
+  body.dark-mode .action-buttons button{
+    background: rgba(142, 130, 250, 0.2); /* Fundo roxo suave */
+    color: #f4f4f4; /* Texto claro */
+    border: 1px solid rgba(142, 130, 250, 0.5); /* Borda roxa */
+    border-radius: 6px; /* Bordas arredondadas */
+  }
+
+  body.dark-mode button:hover {
+    background: #555;
+  }
+  
+/* Modo escuro para o botão de microfone */
+body.dark-mode #microphone-button {
+    background: rgb(179 170 255); /* Roxo suave no fundo */
+    border: 1px solid rgba(142, 130, 250, 0.9); /* Borda levemente mais escura */
+    color: #ffffff; /* Ícone branco para contraste */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2); /* Sombra ajustada */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode #microphone-button:hover {
+    background: rgba(142, 130, 250, 0.95); /* Roxo mais intenso ao passar o mouse */
+    transform: scale(1.1); /* Leve ampliação ao passar o mouse */
+    box-shadow: 0 8px 12px rgba(142, 130, 250, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3); /* Realce da sombra */
+}
+
+body.dark-mode #microphone-button img {
+    filter: brightness(1); /* Mantém o brilho do ícone */
+}
+
+/* Estilização com fundo roxo suave no modo escuro */
+body.dark-mode #shopping-list li {
+    background: rgb(142 130 250 / 4%); /* Roxo suave com transparência */
+    border: 1px solid rgba(142, 130, 250, 0.5); /* Borda roxa mais intensa */
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e0e0e0; /* Texto claro para contraste */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para profundidade */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode #shopping-list li:hover {
+    background: rgba(142, 130, 250, 0.35); /* Roxo mais intenso ao passar o mouse */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(142, 130, 250, 0.3); /* Realce na sombra */
+    transform: translateY(-3px); /* Leve elevação */
+}
+
+body.dark-mode #shopping-list li span {
+    color: #f4f4f4; /* Texto claro */
+    font-size: 1rem;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+}
+
+body.dark-mode #shopping-list li .delete-button {
+    color: rgba(255, 77, 77, 0.8); /* Destaque vermelho suave */
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+body.dark-mode #shopping-list li .delete-button:hover {
+    color: rgba(255, 77, 77, 1); /* Intensifica o vermelho */
+    transform: scale(1.1);
+}
+
+body.dark-mode #total-items{
+    background-color: #f9f9f90a;
+    color: rgb(138 138 138);
+    border: none;
+}
+
+body.dark-mode p #total-items{
+    color: rgb(145 145 145);
+}
+
+/* Estilização do modal no modo escuro */
+body.dark-mode .modal-content {
+    background-color: #1e1e1e; /* Fundo escuro */
+    color: #f4f4f4; /* Texto claro */
+    border: 1px solid #444; /* Borda sutil */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Sombra suave */
+}
+
+body.dark-mode .modal-content p{
+    color: #f9f9f9;
+}
+
+body.dark-mode .modal-content h2{
+    color: #ffffff;
+}
+
+body.dark-mode .modal-content ul{
+    color: #d1d1d1;
+}
+
+/* Responsividade para o botão */
+@media (max-width: 768px) {
+    #dark-mode-toggle {
+      width: 40px;
+      height: 40px;
+      top: 15px;
+      right: 15px;
+    }
+  
+    #dark-mode-toggle i {
+      font-size: 1.2rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #dark-mode-toggle {
+        width: 28px;
+        height: 28px;
+        top: 30px;
+        right: 25px;
+        transition:none;
+    }
+  
+    #dark-mode-toggle i {
+      font-size: 0.7rem;
+    }
+
+    body.dark-mode #shopping-list li {
+        padding: 8px 10px;
+        margin: 8px 0;
+    }
+  }

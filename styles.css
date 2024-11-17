@@ -45,8 +45,6 @@ header {
     width: 50px;
     height: 50px;
     object-fit: cover; /* Garante que a logo mantenha suas proporções */
-    border-radius: 50%; /* Adiciona bordas arredondadas à logo, opcional */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
 /* Layout principal */
@@ -105,6 +103,13 @@ main {
     font-weight: bold;
 }
 
+p#total-items{
+font-size: 1rem;
+color: rgb(85, 85, 85);
+text-align: left;
+margin-top: 5px;
+display: block;
+}
 
 button {
     padding: 12px 18px;
@@ -352,20 +357,30 @@ button {
     color: white;
     border: none;
     border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    z-index: 1000;
+    font-size: 20px; /* Define o tamanho do ícone */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #help-button:hover {
     background-color: #4d47c3;
     transform: scale(1.1);
 }
+
+#help-button i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0; /* Remove margens automáticas */
+    padding: 0; /* Remove espaçamentos internos */
+    font-size: 24px; /* Ajusta o tamanho do ícone para centralização perfeita */
+    line-height: 1; /* Garante que o ícone fique verticalmente centralizado */
+}
+
 
 /* Modal */
 .modal {
@@ -441,7 +456,7 @@ button {
 .close-button {
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 15px;
     font-size: 1.4rem;
     color: #555;
     cursor: pointer;
