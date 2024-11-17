@@ -74,7 +74,7 @@ body.dark-mode #dark-mode-toggle {
   }
 
   body.dark-mode button:hover {
-    background: #555;
+    background: rgba(142, 130, 250, 0.363);
   }
   
 /* Modo escuro para o botão de microfone */
