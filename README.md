@@ -2,8 +2,6 @@
 
 Uma aplicação web interativa para criar e gerenciar listas de compras de forma prática e intuitiva.
 
-![Minha Lista](assets/Logo.png)
-
 ## 🚀 Funcionalidades
 
 - **Adicionar itens**: Digite o nome do item e pressione `Enter` ou clique em "Adicionar".
