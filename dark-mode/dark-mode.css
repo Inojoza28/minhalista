@@ -171,6 +171,7 @@ body.dark-mode .modal-content ul{
       height: 40px;
       top: 15px;
       right: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     }
   
     #dark-mode-toggle i {
@@ -185,6 +186,7 @@ body.dark-mode .modal-content ul{
         top: 30px;
         right: 25px;
         transition:none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     }
   
     #dark-mode-toggle i {
@@ -196,3 +198,65 @@ body.dark-mode .modal-content ul{
         margin: 8px 0;
     }
   }
+
+  @media print {
+    /* Oculta todos os botões e o campo de entrada */
+    button, 
+    #dark-mode-toggle, 
+    #microphone-button,
+    #item-input {
+        display: none !important;
+    }
+
+    /* Ajusta o header */
+    header {
+        margin-bottom: 20px;
+    }
+
+    /* Lista e itens alinhados à esquerda */
+    #shopping-list {
+        margin: 0;
+        padding: 0;
+    }
+
+    #shopping-list li {
+        text-align: left !important; /* Força o alinhamento à esquerda */
+        border: none; /* Remove bordas se necessário */
+        padding-left: 15px; /* Espaçamento para o texto */
+        list-style-position: inside; /* Garante que os marcadores fiquem dentro */
+    }
+
+    #shopping-list li span {
+        display: inline-block;
+        text-align: left;
+        width: 100%; /* Garante que o texto ocupe toda a largura */
+    }
+}
+
+@media print {
+  /* Ajusta a cor do texto no modo de impressão */
+  body {
+      color: #4a4a4a; /* Cinza suave no modo claro */
+  }
+
+  body.dark-mode {
+      color: #e0e0e0; /* Cinza claro no modo escuro */
+  }
+
+  header {
+      color: #333; /* Um cinza mais escuro para o header no modo claro */
+  }
+
+  body.dark-mode header {
+      color: #575555; /* Branco suave para o header no modo escuro */
+  }
+
+  #shopping-list li span {
+      color: #4a4a4a; /* Mesma cor para os itens no modo claro */
+  }
+
+  body.dark-mode #shopping-list li span {
+      color: #575555; /* Ajuste para o modo escuro */
+  }
+}
+
