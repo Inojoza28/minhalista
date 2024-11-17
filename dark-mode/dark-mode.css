@@ -177,6 +177,16 @@ body.dark-mode .modal-content ul{
     #dark-mode-toggle i {
       font-size: 1.2rem;
     }
+
+    #dark-mode-toggle:hover{
+      transition: none;
+    }
+
+    body.dark-mode #shopping-list li {
+      padding: 8px 10px;
+      margin: 8px 0;
+  }
+
   }
   
   @media (max-width: 480px) {
@@ -191,6 +201,10 @@ body.dark-mode .modal-content ul{
   
     #dark-mode-toggle i {
       font-size: 0.7rem;
+    }
+
+    #dark-mode-toggle:hover{
+      transition: none;
     }
 
     body.dark-mode #shopping-list li {
@@ -259,4 +273,3 @@ body.dark-mode .modal-content ul{
       color: #575555; /* Ajuste para o modo escuro */
   }
 }
-
