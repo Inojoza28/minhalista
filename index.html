@@ -17,12 +17,15 @@
       </header>      
   <main>
     <section class="input-section">
-      <input type="text" id="item-input" placeholder="Digite o item" />
+      <input type="text" id="item-input" placeholder="Adicione um novo item" />
       <button id="add-button">Adicionar</button>
       <button id="microphone-button" title="Falar itens">
         <img src="assets/microfone.png" alt="Microfone">
       </button>
     </section>
+    <p id="total-items" style="font-size: 1rem; color: #555; text-align: left; margin-top: 5px; display: none;">
+      Total de itens: <span id="item-count">0</span>
+    </p>    
     <section class="list-section">
       <p id="empty-message" style="display: none;">Sua lista está vazia. Adicione itens para começar!</p>
       <ul id="shopping-list"></ul>
@@ -37,7 +40,35 @@
         <button id="remove-all-button" style="display: none;">
           <i class="fas fa-trash-alt"></i> Remover Todos
         </button>
-      </section>          
+      </section>       
+
+      <!-- Botão Flutuante -->
+<button id="help-button" title="Ajuda">
+  <i class="fas fa-question-circle"></i>
+</button>
+
+<!-- Modal de Ajuda -->
+<div id="help-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <div class="modal-header">
+      <img src="assets/Logo.png" alt="Logo Minha Lista" class="modal-logo">
+      <h2>Sobre a Aplicação</h2>
+    </div>
+    <p>
+      Esta aplicação permite criar e gerenciar uma lista de compras de maneira simples e intuitiva.
+      <br><br>
+      <strong>Funcionalidades principais:</strong>
+      <ul>
+        <li>Adicione itens clicando em "Adicionar" ou pressionando "Enter".</li>
+        <li>Use o microfone para adicionar itens por voz.</li>
+        <li>Marque itens como concluídos usando a caixa de seleção.</li>
+        <li>Remova itens com o botão de lixeira.</li>
+        <li>Baixe ou imprima sua lista.</li>
+      </ul>
+    </p>
+  </div>
+</div>
   </main>
   <script src="script.js"></script>
 </body>

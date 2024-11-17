@@ -7,6 +7,8 @@ const printButton = document.getElementById('print-button');
 const microphoneButton = document.getElementById('microphone-button');
 const emptyMessage = document.getElementById('empty-message');
 const removeAllButton = document.getElementById('remove-all-button'); // Botão para remover todos
+const totalItemsContainer = document.getElementById('total-items'); // Contêiner do total de itens
+const totalItems = document.getElementById('item-count'); // Total de itens
 
 // Configuração do reconhecimento de voz
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -42,6 +44,7 @@ function addItem(text, completed = false) {
   listItem.querySelector('.complete-checkbox').addEventListener('change', (event) => toggleComplete(event, listItem));
 
   updateEmptyMessage();
+  updateItemCount(); // Atualiza o total de itens
   updateRemoveAllButton(); // Atualiza o botão de "Remover Todos"
   saveToLocalStorage();
 }
@@ -62,6 +65,7 @@ function removeItem(listItem) {
   setTimeout(() => {
     listItem.remove();
     updateEmptyMessage();
+    updateItemCount(); // Atualiza o total de itens
     updateRemoveAllButton(); // Atualiza o botão de "Remover Todos"
     saveToLocalStorage();
   }, 300); // Tempo igual ao da animação CSS
@@ -73,6 +77,7 @@ function removeAllItems() {
   if (confirmRemoval) {
     list.innerHTML = ''; // Remove todos os itens da lista
     updateEmptyMessage();
+    updateItemCount(); // Atualiza o total de itens
     updateRemoveAllButton(); // Atualiza o botão de "Remover Todos"
     saveToLocalStorage();
   }
@@ -91,6 +96,17 @@ function saveToLocalStorage() {
 function loadFromLocalStorage() {
   const items = JSON.parse(localStorage.getItem('shoppingList')) || [];
   items.forEach(item => addItem(item.text, item.completed));
+}
+
+// Função para atualizar o total de itens
+function updateItemCount() {
+  const count = list.children.length;
+
+  // Atualiza o valor do contador
+  totalItems.textContent = count;
+
+  // Exibe ou oculta o contador com base no número de itens
+  totalItemsContainer.style.display = count > 0 ? 'block' : 'none';
 }
 
 // Função para baixar lista aprimorada
@@ -156,6 +172,15 @@ list.addEventListener('click', (event) => {
   }
 });
 
+// Permitir adicionar item ao pressionar "Enter"
+itemInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') { // Verifica se a tecla pressionada foi "Enter"
+    addItem(itemInput.value); // Adiciona o item
+    itemInput.value = ''; // Limpa o campo de entrada
+    itemInput.focus(); // Mantém o foco no campo de entrada
+  }
+});
+
 removeAllButton.addEventListener('click', removeAllItems); // Evento para remover todos os itens
 
 downloadButton.addEventListener('click', downloadList);
@@ -184,4 +209,27 @@ recognition.addEventListener('end', () => {
 // Inicialização
 loadFromLocalStorage();
 updateEmptyMessage();
+updateItemCount(); // Atualiza o total de itens ao carregar a página
 updateRemoveAllButton(); // Atualiza o botão "Remover Todos" ao carregar a página
+
+// Seleção de elementos
+const helpButton = document.getElementById('help-button');
+const helpModal = document.getElementById('help-modal');
+const closeButton = helpModal.querySelector('.close-button');
+
+// Evento para abrir o modal
+helpButton.addEventListener('click', () => {
+  helpModal.style.display = 'flex';
+});
+
+// Evento para fechar o modal
+closeButton.addEventListener('click', () => {
+  helpModal.style.display = 'none';
+});
+
+// Fechar modal ao clicar fora do conteúdo
+window.addEventListener('click', (event) => {
+  if (event.target === helpModal) {
+    helpModal.style.display = 'none';
+  }
+});

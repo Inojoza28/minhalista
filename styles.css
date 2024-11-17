@@ -31,6 +31,7 @@ header {
     margin-bottom: 20px;
 }
 
+
 /* Estilo para o conteúdo do header */
 .header-content {
     display: flex;
@@ -56,6 +57,7 @@ main {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     padding: 20px;
+    margin-bottom: 68px;
 }
 
 /* Sessão de entrada */
@@ -80,6 +82,29 @@ main {
     border-color: #5a55e5;
     box-shadow: 0 0 8px rgba(90, 85, 229, 0.3);
 }
+
+/* Estilização do contador de itens */
+#total-items {
+    display: none; /* Inicialmente escondido */
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    width: auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#total-items span {
+    color: #5a55e5;
+    font-weight: bold;
+}
+
 
 button {
     padding: 12px 18px;
@@ -316,6 +341,117 @@ button {
     transform: translateY(-2px);
 }
 
+/* Botão Flutuante */
+#help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #5a55e5;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 1000;
+}
+
+#help-button:hover {
+    background-color: #4d47c3;
+    transform: scale(1.1);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 64%);
+    z-index: 1001;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Bordas arredondadas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    object-fit: cover; /* Garante que a imagem mantenha proporções */
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    text-align: left;
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.modal-content p {
+    margin-top: 10px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.modal-content ul {
+    margin: 10px 0;
+    padding-left: 20px;
+    color: #555;
+}
+
+.modal-content ul li {
+    margin-bottom: 5px;
+}
+
+/* Botão de Fechar */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.4rem;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #e53935;
+}
+
 
 /* Responsividade */
 @media (max-width: 768px) {
@@ -361,6 +497,11 @@ button {
         padding: 8px 12px;
     }
 
+    #total-items {
+        font-size: 0.9rem;
+        padding: 5px 8px;
+    }
+
     button {
         font-size: 0.9rem;
         padding: 10px 15px;
@@ -397,6 +538,35 @@ button {
         font-size: 0.8rem;
         padding: 8px 12px;
     }
+
+    .modal-content {
+        width: 90%; /* O modal ocupa quase toda a largura */
+        padding: 20px; /* Reduz o espaçamento interno */
+      }
+    
+      .modal-header {
+        justify-content: flex-start; /* Mantém a logo e o texto lado a lado */
+        gap: 10px; /* Espaço entre a logo e o texto */
+      }
+    
+      .modal-header h2 {
+        font-size: 1.3rem; /* Título menor */
+      }
+    
+      .modal-logo {
+        width: 30px; /* Logo menor */
+        height: 30px;
+      }
+    
+      .modal p {
+        font-size: 0.9rem; /* Texto menor */
+        line-height: 1.5; /* Melhor espaçamento entre linhas */
+      }
+    
+      .modal-content ul {
+        padding-left: 20px; /* Ajusta o alinhamento da lista */
+      }
+    
 }
 
 /* Responsividade para celulares (telas pequenas) */
@@ -422,6 +592,11 @@ button {
     #item-input {
         font-size: 0.8rem;
         padding: 6px 10px;
+    }
+
+    #total-items {
+        font-size: 0.8rem;
+        padding: 4px 6px;
     }
 
     button {
@@ -462,4 +637,31 @@ button {
         font-size: 0.7rem;
         padding: 6px 10px;
     }
+
+    .modal-content {
+        width: 95%; /* O modal ocupa quase toda a largura */
+        padding: 15px; /* Reduz ainda mais o espaçamento interno */
+      }
+    
+      .modal-header {
+        justify-content: flex-start; /* Mantém a logo e o texto lado a lado */
+        gap: 8px; /* Reduz o espaço entre logo e texto */
+      }
+    
+      .modal-logo {
+        width: 36px;
+        height: 36px;
+      }
+    
+      .modal-header h2 {
+        font-size: 1.2rem; /* Título ainda menor */
+      }
+    
+      .modal p {
+        font-size: 0.85rem; /* Texto menor */
+      }
+    
+      .modal-content ul {
+        padding-left: 15px; /* Ajusta o alinhamento da lista */
+      }
 }
