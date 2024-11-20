@@ -179,23 +179,23 @@ downloadButton.addEventListener('click', downloadList);
 printButton.addEventListener('click', printList);
 
 microphoneButton.addEventListener('click', () => {
-  recognition.start();
-  microphoneButton.classList.add('listening');
+  recognition.start(); // Começa a ouvir a fala do usuário.
+  microphoneButton.classList.add('listening'); // Adiciona um estilo visual indicando que está "ouvindo".
 });
 
 recognition.addEventListener('result', (event) => {
-  const spokenText = event.results[0][0].transcript.trim();
-  if (spokenText) addItem(spokenText);
-  microphoneButton.classList.remove('listening');
+  const spokenText = event.results[0][0].transcript.trim(); // Captura o texto falado.
+  if (spokenText) addItem(spokenText); // Adiciona o texto capturado em algum lugar.
+  microphoneButton.classList.remove('listening'); // Remove o estilo de "ouvindo".
 });
 
 recognition.addEventListener('error', () => {
-  alert('Erro ao reconhecer fala. Por favor, tente novamente.');
-  microphoneButton.classList.remove('listening');
+  alert('Erro ao reconhecer fala. Por favor, tente novamente.'); // Mostra uma mensagem de erro.
+  microphoneButton.classList.remove('listening'); // Remove o estilo de "ouvindo".
 });
 
 recognition.addEventListener('end', () => {
-  microphoneButton.classList.remove('listening');
+  microphoneButton.classList.remove('listening'); // Remove o estilo de "ouvindo".
 });
 
 // Controle do modal de ajuda
