@@ -113,10 +113,10 @@ function loadFromLocalStorage() {
 
 // Baixar lista como arquivo
 function downloadList() {
-  const items = Array.from(list.children).map((item, index) => {
+  const items = Array.from(list.children).map((item) => {
     const text = item.querySelector('span').textContent;
-    const completed = item.querySelector('.complete-checkbox').checked ? ' (Concluído)' : '';
-    return `${index + 1}. ${text}${completed}`;
+    const completed = item.querySelector('.complete-checkbox').checked;
+    return { text, completed };
   });
 
   if (items.length === 0) {
@@ -124,16 +124,36 @@ function downloadList() {
     return;
   }
 
+  // Data e hora formatada
   const date = new Date();
   const formattedDate = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
-  const header = `Lista de Compras\nCriada em: ${formattedDate}\nTotal de Itens: ${items.length}\n\nItens:\n`;
-  const content = header + items.join('\n');
+  const formattedTime = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
+  // Separação de itens concluídos e pendentes
+  const completedItems = items.filter((item) => item.completed).map((item) => `- ${item.text}`);
+  const pendingItems = items.filter((item) => !item.completed).map((item) => `- ${item.text}`);
+
+  // Cabeçalho
+  const header = `Minha Lista de Compras\nCriada em: ${formattedDate} às ${formattedTime}\nTotal de Itens: ${items.length}\n\n`;
+
+  // Conteúdo dos itens
+  const completedSection = completedItems.length > 0 
+    ? `Itens Concluídos:\n${completedItems.join('\n')}\n\n` 
+    : 'Itens Concluídos:\nNenhum item concluído.\n\n';
+
+  const pendingSection = pendingItems.length > 0 
+    ? `Itens Pendentes:\n${pendingItems.join('\n')}\n\n` 
+    : 'Itens Pendentes:\nNenhum item pendente.\n\n';
+
+  // Texto final
+  const content = header + pendingSection + completedSection;
+
+  // Geração e download do arquivo
   const blob = new Blob([content], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'lista_de_compras.txt';
+  a.download = 'minha_lista_de_compras.txt';
   a.click();
   URL.revokeObjectURL(url);
 }
